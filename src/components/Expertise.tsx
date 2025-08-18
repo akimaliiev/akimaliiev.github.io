@@ -1,91 +1,68 @@
 import React from "react";
-import '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faReact, faDocker, faPython } from '@fortawesome/free-brands-svg-icons';
+import { faReact } from '@fortawesome/free-brands-svg-icons';
+import { faRobot, faBrain } from '@fortawesome/free-solid-svg-icons';
 import Chip from '@mui/material/Chip';
 import '../assets/styles/Expertise.scss';
 
-const labelsFirst = [
-    "React",
-    "TypeScript",
-    "JavaScript",
-    "HTML5",
-    "CSS3",
-    "SASS",
-    "Flask",
-    "Python",
-    "SQL",
-    "PostgreSQL",
-    "Postman"
+const labelsFlutter = [
+  "Flutter", "Dart", "Riverpod/BLoC", "Clean Arch",
+  "GoRouter", "REST/WebSocket", "SQLite/Hive",
+  "Firebase", "Testing"
 ];
 
-const labelsSecond = [
-    "Git",
-    "GitHub Actions",
-    "Docker",
-    "AWS",
-    "Azure",
-    "Linux",
-    "Snowflake",
-    "Pandas",
-    "Selenium",
+const labelsAgent = [
+  "ElizaOS/CryptoAgentOS", "TypeScript", "Bun/Node.js",
+  "OpenAI/Groq", "RAG", "LLMs",
+    "JSON Ingestion", "Reporting"
 ];
 
-const labelsThird = [
-    "OpenAI",
-    "Groq",
-    "LangChain",
-    "Qdrant",
-    "Hugging Face",
-    "LlamaIndex",
-    "Streamlit",
+const labelsNLP = [
+  "Python", "FastAPI", "Transformers/ViTs", "spaCy",
+  "Sentence-Embeddings", "NER", "PostgreSQL", "Streamlit"
 ];
 
 function Expertise() {
-    return (
+  return (
     <div className="container" id="expertise">
-        <div className="skills-container">
-            <h1>Expertise</h1>
-            <div className="skills-grid">
-                <div className="skill">
-                    <FontAwesomeIcon icon={faReact} size="3x"/>
-                    <h3>Full Stack Web Development</h3>
-                    <p>I have built a diverse array of web applications from scratch using modern technologies such as React and Flask. I have a strong proficiency in the SDLC process and frontend + backend development.</p>
-                    <div className="flex-chips">
-                        <span className="chip-title">Tech stack:</span>
-                        {labelsFirst.map((label, index) => (
-                            <Chip key={index} className='chip' label={label} />
-                        ))}
-                    </div>
-                </div>
-
-                <div className="skill">
-                    <FontAwesomeIcon icon={faDocker} size="3x"/>
-                    <h3>DevOps & Automation</h3>
-                    <p>Once the application is built, I help clients set up DevOps testing, CI/CD pipelines, and deployment automation to support the successful Go-Live.</p>
-                    <div className="flex-chips">
-                        <span className="chip-title">Tech stack:</span>
-                        {labelsSecond.map((label, index) => (
-                            <Chip key={index} className='chip' label={label} />
-                        ))}
-                    </div>
-                </div>
-
-                <div className="skill">
-                    <FontAwesomeIcon icon={faPython} size="3x"/>
-                    <h3>GenAI & LLM</h3>
-                    <p>Stay relevant in the market by leveraging the latest AI models in your projects. I have professional experience building enterprise grade GenAI-enabled solutions to empower intelligent decision making.</p>
-                    <div className="flex-chips">
-                        <span className="chip-title">Tech stack:</span>
-                        {labelsThird.map((label, index) => (
-                            <Chip key={index} className='chip' label={label} />
-                        ))}
-                    </div>
-                </div>
+      <div className="skills-container">
+        <h1>Expertise</h1>
+        <div className="skills-grid">
+          
+          <div className="skill">
+            <FontAwesomeIcon icon={faReact} size="3x"/>
+            <h3>Flutter Development</h3>
+            <p>Cross-platform apps with solid architecture, performance, testing, and user-friendly design.</p>
+            <div className="flex-chips">
+              <span className="chip-title">Tech stack:</span>
+              {labelsFlutter.map((label, i) => <Chip key={i} className="chip" label={label} />)}
             </div>
+          </div>
+
+          <div className="skill">
+            <FontAwesomeIcon icon={faRobot} size="3x"/>
+            <h3>AI Agents</h3>
+            <p>Agentic analytics for price/news insights with LLMs, RAG, Blockchain.</p>
+            <div className="flex-chips">
+              <span className="chip-title">Tech stack:</span>
+              {labelsAgent.map((label, i) => <Chip key={i} className="chip" label={label} />)}
+            </div>
+          </div>
+
+          <div className="skill">
+            <FontAwesomeIcon icon={faBrain} size="3x"/>
+            <h3>CV & NLP</h3>
+            <p>Resume parsing, entity extraction, embeddings, and job matching APIs with clean demos.</p>
+            <div className="flex-chips">
+              <span className="chip-title">Tech stack:</span>
+              {labelsNLP.map((label, i) => <Chip key={i} className="chip" label={label} />)}
+            </div>
+          </div>
+
         </div>
+      </div>
     </div>
-    );
+  );
 }
 
 export default Expertise;
