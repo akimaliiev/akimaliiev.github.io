@@ -77,6 +77,38 @@
     var mo = new MutationObserver(removeContact);
     mo.observe(document.documentElement, { childList: true, subtree: true });
   })();
+    
   </script>
+  <script>
+(function () {
+  function killPersonalProjects() {
+    // 1) Найти заголовок "Personal Projects" (на всякий случай — без учёта регистра/пробелов)
+    var hs = document.querySelectorAll('h1,h2,h3,h4');
+    hs.forEach(function(h){
+      var t = (h.textContent || '').replace(/\s+/g,' ').trim().toLowerCase();
+      if (t === 'personal projects' || t.includes('personal projects')) {
+        var section = h.closest('section,div,main,article') || h.parentElement;
+        if (section && section.parentNode) section.parentNode.removeChild(section);
+      }
+    });
+
+    // 2) Ссылки из меню, ведущие к этим проектам/якорям (если есть)
+    document.querySelectorAll('a[href*="projects"], a[href*="#projects"]').forEach(function(a){
+      var li = a.closest('li');
+      if (li && li.parentNode) li.parentNode.removeChild(li);
+      else if (a.parentNode) a.parentNode.removeChild(a);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', killPersonalProjects);
+  } else {
+    killPersonalProjects();
+  }
+  // если SPA дорисует позже — повторим
+  new MutationObserver(killPersonalProjects).observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script>
+
 </body>
 </html>
