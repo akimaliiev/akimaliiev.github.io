@@ -1,1 +1,63 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="My personal portfolio website."/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>Yuji Sato</title><script defer="defer" src="/static/js/main.1f538c5a.js"></script><link href="/static/css/main.e03cf415.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <link rel="icon" href="/favicon.ico"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="theme-color" content="#000000"/>
+  <meta name="description" content="My personal portfolio website."/>
+  <link rel="apple-touch-icon" href="/logo192.png"/>
+  <link rel="manifest" href="/manifest.json"/>
+  <title>Sultan Akimaliyev</title>
+
+  <!-- мгновенно прячем контакт и пункт меню -->
+  <style>
+    #contact { display: none !important; }
+    a[href="#contact"] { display: none !important; }
+  </style>
+
+  <script defer="defer" src="/static/js/main.1f538c5a.js"></script>
+  <link href="/static/css/main.e03cf415.css" rel="stylesheet">
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+  <!-- удаляем контакт из DOM даже если его дорисует React -->
+  <script>
+  (function () {
+    function removeContact() {
+      // 1) секция с id="contact"
+      var contact = document.querySelector('#contact');
+      if (contact && contact.parentNode) contact.parentNode.removeChild(contact);
+
+      // 2) пункт(ы) меню, ведущие на #contact
+      document.querySelectorAll('a[href="#contact"]').forEach(function(a){
+        var li = a.closest('li');
+        if (li && li.parentNode) li.parentNode.removeChild(li);
+        else if (a.parentNode) a.parentNode.removeChild(a);
+      });
+
+      // 3) подстраховка: удалить раздел по заголовку
+      var headings = Array.from(document.querySelectorAll('h1,h2,h3,h4'));
+      headings.forEach(function(h){
+        var t = (h.textContent || '').trim().toLowerCase();
+        if (t === 'contact me' || t === 'contact' || t === 'contacts') {
+          var section = h.closest('section,div,main,article') || h.parentElement;
+          if (section && section.parentNode) section.parentNode.removeChild(section);
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', removeContact);
+    } else {
+      removeContact();
+    }
+    // если приложение перерисует DOM — повторим удаление
+    var mo = new MutationObserver(removeContact);
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+  })();
+  </script>
+</body>
+</html>
